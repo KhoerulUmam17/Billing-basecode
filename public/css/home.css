@@ -1,0 +1,104 @@
+/* home.css - Custom styles for DOKU-like responsive homepage */
+
+.doku-hero {
+    background: linear-gradient(90deg, #f7f8fa 60%, #e6e9f0 100%);
+    padding: 60px 0 40px 0;
+    text-align: center;
+}
+.doku-hero img {
+    height: 60px;
+    margin-bottom: 24px;
+}
+.doku-hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+}
+.doku-hero p {
+    font-size: 1.25rem;
+    color: #444;
+    margin: 20px 0 32px 0;
+}
+.doku-hero .btn {
+    padding: 12px 36px;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 991.98px) {
+    .doku-hero {
+        padding: 40px 0 24px 0;
+    }
+    .doku-hero h1 {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 767.98px) {
+    .doku-hero {
+        padding: 24px 0 12px 0;
+    }
+    .doku-hero h1 {
+        font-size: 1.5rem;
+    }
+    .doku-hero img {
+        height: 40px;
+    }
+}
+
+.doku-section {
+    margin-bottom: 3rem;
+}
+.doku-section h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+.doku-section p {
+    color: #555;
+}
+
+.doku-payment-logos img {
+    height: 40px;
+    margin: 0 10px 10px 0;
+}
+@media (max-width: 575.98px) {
+    .doku-payment-logos img {
+        height: 28px;
+        margin: 0 6px 6px 0;
+    }
+}
+
+.doku-feature-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    padding: 32px 16px;
+    margin-bottom: 24px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.doku-feature-box img {
+    height: 64px;
+    margin-bottom: 16px;
+}
+.doku-feature-box h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.doku-feature-box p {
+    font-size: 0.98rem;
+    color: #666;
+}
+
+@media (max-width: 767.98px) {
+    .doku-feature-box {
+        min-height: 180px;
+        padding: 20px 8px;
+    }
+    .doku-feature-box img {
+        height: 40px;
+    }
+}

@@ -1,0 +1,9 @@
+stages:
+  - deploy
+
+deploy_development:
+  stage: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y sshpass
+    - sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p 37235 root@103.174.67.234 "cd /var/www/html/project-sistem-informasi-hris && git pull origin main && php artisan optimize:clear"
