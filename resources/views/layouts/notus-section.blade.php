@@ -1,22 +1,3 @@
-<!--
-
-=========================================================
-* Notus Tailwind JS - v1.1.0 based on Tailwind Starter Kit by Creative Tim
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/notus-js
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md)
-
-* Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
 <!DOCTYPE html>
 <html>
 
@@ -28,7 +9,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <!-- Styles -->
     @livewireStyles

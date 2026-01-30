@@ -47,95 +47,6 @@
                                 </div>
                             </form>
                             @include('auth.otp-modal')
-                            <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                // Register AJAX
-                                const registerForm = document.getElementById('registerForm');
-                                const agreement = document.getElementById('agreement');
-                                const agreementError = document.getElementById('agreementError');
-                                registerForm.addEventListener('submit', async function(e) {
-                                    if (!agreement.checked) {
-                                        e.preventDefault();
-                                        agreementError.classList.remove('d-none');
-                                        agreement.focus();
-                                        return;
-                                    } else {
-                                        agreementError.classList.add('d-none');
-                                    }
-                                    e.preventDefault();
-                                    const formData = new FormData(registerForm);
-                                    try {
-                                        const response = await fetch("{{ route('register.post') }}", {
-                                            method: 'POST',
-                                            headers: {
-                                                'X-Requested-With': 'XMLHttpRequest',
-                                                'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
-                                            },
-                                            body: formData
-                                        });
-                                        const data = await response.json();
-                                        if (data.success) {
-                                            // Tampilkan modal OTP
-                                            document.getElementById('otpModal').style.display = 'block';
-                                            document.getElementById('otpEmail').innerText = formData.get('email');
-                                            document.getElementById('otp_email_input').value = formData.get('email');
-                                        } else {
-                                            alert(data.message || 'Terjadi kesalahan saat register.');
-                                        }
-                                    } catch (err) {
-                                        alert('Terjadi kesalahan koneksi.');
-                                    }
-                                });
-                                // OTP input logic
-                                const otpInputs = document.querySelectorAll('.otp-input');
-                                otpInputs.forEach((input, idx) => {
-                                    input.addEventListener('input', function() {
-                                        if (this.value.length === 1 && idx < otpInputs.length - 1) {
-                                            otpInputs[idx + 1].focus();
-                                        }
-                                    });
-                                    input.addEventListener('keydown', function(e) {
-                                        if (e.key === 'Backspace' && this.value === '' && idx > 0) {
-                                            otpInputs[idx - 1].focus();
-                                        }
-                                    });
-                                });
-                                // Gabungkan input sebelum submit OTP
-                                const otpForm = document.getElementById('otpForm');
-                                otpForm.addEventListener('submit', async function(e) {
-                                    e.preventDefault();
-                                    let otp = '';
-                                    otpInputs.forEach(input => { otp += input.value; });
-                                    document.getElementById('otp_code_joined').value = otp;
-                                    const otpFormData = new FormData(otpForm);
-                                    try {
-                                        const response = await fetch("{{ route('otp.verify') }}", {
-                                            method: 'POST',
-                                            headers: {
-                                                'X-Requested-With': 'XMLHttpRequest',
-                                                'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
-                                            },
-                                            body: otpFormData
-                                        });
-                                        const data = await response.json();
-                                        if (data.success) {
-                                            window.location.href = data.redirect;
-                                        } else {
-                                            document.getElementById('otpError').classList.remove('d-none');
-                                            document.getElementById('otpError').innerText = data.message || 'OTP salah atau kadaluarsa.';
-                                        }
-                                    } catch (err) {
-                                        document.getElementById('otpError').classList.remove('d-none');
-                                        document.getElementById('otpError').innerText = 'Terjadi kesalahan koneksi.';
-                                    }
-                                });
-                                // Close modal
-                                document.getElementById('closeOtpModal').addEventListener('click', function(e) {
-                                    e.preventDefault();
-                                    document.getElementById('otpModal').style.display = 'none';
-                                });
-                            });
-                            </script>
                         </div>
                     </div>
                     <div class="flex flex-wrap mt-6">
@@ -161,5 +72,98 @@
         </footer>
     </section>
 </main>
+@endsection
+
+@section('js')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Register AJAX
+    const registerForm = document.getElementById('registerForm');
+    const agreement = document.getElementById('agreement');
+    const agreementError = document.getElementById('agreementError');
+    registerForm.addEventListener('submit', async function(e) {
+        if (!agreement.checked) {
+            e.preventDefault();
+            agreementError.classList.remove('d-none');
+            agreement.focus();
+            return;
+        } else {
+            agreementError.classList.add('d-none');
+        }
+        e.preventDefault();
+        const formData = new FormData(registerForm);
+        try {
+            const response = await fetch("{{ route('register.post') }}", {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
+                },
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                // Tampilkan modal OTP
+                document.getElementById('otpModal').style.display = 'block';
+                document.getElementById('otpEmail').innerText = formData.get('email');
+                document.getElementById('otp_email_input').value = formData.get('email');
+            } else {
+                alert(data.message || 'Terjadi kesalahan saat register.');
+            }
+        } catch (err) {
+            alert('Terjadi kesalahan koneksi.');
+        }
+    });
+
+    // OTP input logic
+    const otpInputs = document.querySelectorAll('.otp-input');
+    otpInputs.forEach((input, idx) => {
+        input.addEventListener('input', function() {
+            if (this.value.length === 1 && idx < otpInputs.length - 1) {
+                otpInputs[idx + 1].focus();
+            }
+        });
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '' && idx > 0) {
+                otpInputs[idx - 1].focus();
+            }
+        });
+    });
+    // Gabungkan input sebelum submit OTP
+    const otpForm = document.getElementById('otpForm');
+    otpForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        let otp = '';
+        otpInputs.forEach(input => { otp += input.value; });
+        document.getElementById('otp_code_joined').value = otp;
+        const otpFormData = new FormData(otpForm);
+        try {
+            const response = await fetch("{{ route('otp.verify') }}", {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
+                },
+                body: otpFormData
+            });
+            const data = await response.json();
+            if (data.success) {
+                window.location.href = data.redirect;
+            } else {
+                document.getElementById('otpError').classList.remove('d-none');
+                document.getElementById('otpError').innerText = data.message || 'OTP salah atau kadaluarsa.';
+            }
+        } catch (err) {
+            document.getElementById('otpError').classList.remove('d-none');
+            document.getElementById('otpError').innerText = 'Terjadi kesalahan koneksi.';
+        }
+    });
+    // Close modal
+    document.getElementById('closeOtpModal').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('otpModal').style.display = 'none';
+    });
+});
+</script>
 @endsection
 
