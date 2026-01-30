@@ -2,7 +2,7 @@
     <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-                href="/">Future CRM</a><button
+                href="/">Simpan Data</a><button
                 class="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
                 type="button" onclick="toggleNavbar('example-collapse-navbar')">
                 <i class="text-white fas fa-bars"></i>
@@ -14,7 +14,7 @@
                 <li class="inline-block relative">
                     <a class="lg:text-white lg:hover:text-slate-200 text-slate-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                         href="#menu" onclick="openDropdown(event,'demo-pages-dropdown')">
-                        Menu Sistem
+                        Home Page
                     </a>
                     <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                         id="demo-pages-dropdown">
@@ -53,10 +53,7 @@
                                 <!-- Loader icon here -->
                                 <i class="fas fa-spinner fa-spin"></i> Loading...
                             </div>
-                            <div wire:loading.remove wire:target="login">
-                                <!-- Original icon -->
-                                <i class="fas fa-sign-in-alt"></i> Masuk
-                            </div>
+                           
                         </a>
                     @endauth
                 </li>

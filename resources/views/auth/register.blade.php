@@ -4,56 +4,57 @@
 <main>
     <section class="relative w-full h-full py-40 min-h-screen">
         <div class="absolute top-0 w-full h-full bg-slate-800 bg-full bg-no-repeat" style="background-image: url({{asset('img/new-bg.png')}})"></div>
-        <div class="container mx-auto px-4 h-full">
-            <div class="flex content-center items-center justify-center h-full">
-                <div class="w-full lg:w-4/12 px-4">
-                    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0">
-                        <div class="rounded-t mb-0 px-6 py-6">
-                            <div class="text-center mb-3">
-                                <h6 class="text-slate-500 text-sm font-bold">Register</h6>
-                            </div>
+        <div class="container mx-auto px-4 h-full flex items-center justify-center">
+            <div class="w-full max-w-md mx-auto">
+                <div class="flex flex-col items-center mb-6">
+                    <span class="text-2xl font-bold text-white tracking-wide mb-2 text-center">SIMPANDATA</span>
+                </div>
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-200 border-0">
+                    <div class="rounded-t mb-0 px-6 py-6">
+                        <div class="text-center mb-3">
+                            <h6 class="text-slate-500 text-xl font-bold text-center">Register</h6>
                         </div>
-                        <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                            <form id="registerForm" method="POST">
-                                @csrf
-                                <div class="mb-4">
-                                    <x-label for="name" :value="__('Nama Lengkap')" />
-                                    <x-input id="name" type="text" name="name" required autofocus placeholder="Nama Lengkap" />
-                                </div>
-                                <div class="mb-4">
-                                    <x-label for="email" :value="__('Email')" />
-                                    <x-input id="email" type="email" name="email" required placeholder="Email" />
-                                </div>
-                                <div class="mb-4">
-                                    <x-label for="password" :value="__('Password')" />
-                                    <x-input id="password" type="password" name="password" required placeholder="Password" />
-                                </div>
-                                <div class="mb-4">
-                                    <x-label for="password_confirmation" :value="__('Konfirmasi Password')" />
-                                    <x-input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Konfirmasi Password" />
-                                </div>
-                                <div class="form-check form-check-info text-left mb-3">
-                                    <input class="form-check-input" type="checkbox" name="agreement" id="agreement" required>
-                                    <label class="form-check-label" for="agreement">
-                                        I agree to the <a href="#" class="text-dark font-weight-bolder">Terms and Conditions</a>
-                                    </label>
-                                    <div id="agreementError" class="text-danger text-xs mt-2 d-none">The agreement must be accepted.</div>
-                                </div>
-                                <div class="text-center mt-6">
-                                    <x-button class="w-full">
+                    </div>
+                    <div class="flex-auto px-6 py-8 pt-0">
+                        <form id="registerForm" method="POST" class="space-y-5">
+                            @csrf
+                            <div>
+                                <x-label for="name" :value="__('Nama Lengkap')" class="text-base" />
+                                <x-input id="name" type="text" name="name" required autofocus placeholder="Nama Lengkap" class="w-full" />
+                            </div>
+                            <div>
+                                <x-label for="email" :value="__('Email')" class="text-base" />
+                                <x-input id="email" type="email" name="email" required placeholder="Email" class="w-full" />
+                            </div>
+                            <div>
+                                <x-label for="password" :value="__('Password')" class="text-base" />
+                                <x-input id="password" type="password" name="password" required placeholder="Password" class="w-full" />
+                            </div>
+                            <div>
+                                <x-label for="password_confirmation" :value="__('Konfirmasi Password')" class="text-base" />
+                                <x-input id="password_confirmation" type="password" name="password_confirmation" required placeholder="Konfirmasi Password" class="w-full" />
+                            </div>
+                            <div class="form-check form-check-info text-left mb-3">
+                                <input class="form-check-input" type="checkbox" name="agreement" id="agreement" required>
+                                <label class="form-check-label" for="agreement">
+                                    I agree to the <a href="#" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                                </label>
+                                <div id="agreementError" class="text-danger text-xs mt-2 d-none">The agreement must be accepted.</div>
+                            </div>
+                            <div class="mt-6">
+                                <x-button class="w-full text-base font-bold py-3 text-center">
+                                    <span class="flex items-center justify-center w-full">
                                         <i class="fas fa-sign-in-alt mr-2"></i>
                                         {{ __('Register') }}
-                                    </x-button>
-                                </div>
-                            </form>
-                            @include('auth.otp-modal')
-                        </div>
+                                    </span>
+                                </x-button>
+                            </div>
+                        </form>
+                        @include('auth.otp-modal')
                     </div>
-                    <div class="flex flex-wrap mt-6">
-                        <div class="w-full text-center">
-                            <a href="{{ route('login') }}" class="text-slate-200"><small>Sudah punya akun? Login</small></a>
-                        </div>
-                    </div>
+                </div>
+                <div class="mt-6 text-center">
+                    <a href="{{ route('login') }}" class="text-slate-400 hover:underline"><small>Sudah punya akun? Login</small></a>
                 </div>
             </div>
         </div>
